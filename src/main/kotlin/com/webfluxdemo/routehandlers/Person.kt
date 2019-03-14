@@ -1,11 +1,10 @@
 package com.webfluxdemo.routehandlers
 
 import data.people
-import models.*
+import models.Person
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import reactor.core.publisher.Mono
-import java.net.URI
 
 // Fetches one user from the database
 fun fetchPersonById(request: ServerRequest): Mono<ServerResponse> {
@@ -32,33 +31,6 @@ fun fetchPeople(
   @Suppress("UNUSED_PARAMETER")
   request: ServerRequest
 ): Mono<ServerResponse> {
-
-
-//  Mono.zip(
-//    mutableListOf(
-//      request.bodyToMono(WeatherRequest::class.java)
-//        .map { weatherRequest: WeatherRequest ->
-//          weatherRequest.cities.map {
-//            client
-//              .get()
-//              .uri(URI.create(getWeatherUrl(it)))
-//              .retrieve()
-//              .bodyToMono(WeatherApiResponse::class.java)
-//          }
-//        }
-//    )
-//  ) { weatherResponses: List<WeatherApiResponse> ->
-//    WeatherReport(
-//      weatherResponses.map {
-//        CityWeather(
-//          it.name,
-//          it.main.temp
-//        )
-//      }
-//    )
-//  }
-
-
   return ServerResponse
     .ok()
     .syncBody(people)

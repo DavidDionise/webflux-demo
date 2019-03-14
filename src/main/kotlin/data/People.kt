@@ -2,7 +2,8 @@ package data
 
 import models.Person
 
-var people = mutableListOf<Person>(
+// Serves as a mock DB for the 'Person' route handlers
+var people = mutableListOf(
     Person(
         1,
         "Lydia",
