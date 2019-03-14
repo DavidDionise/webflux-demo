@@ -4,6 +4,7 @@ import models.CityWeather
 import models.WeatherApiResponse
 import models.WeatherReport
 import models.WeatherRequest
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
@@ -11,10 +12,11 @@ import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import reactor.core.publisher.Mono
 
-const val API_KEY = "eb0cbe452a9030be412c4819637ce278"
+val API_KEY = System.getenv("API_KEY")
 
 @Component
 class WeatherHandler {
+
   private val client = WebClient.create("https://api.openweathermap.org")
 
   private fun callWeatherApi(city: String): Mono<WeatherApiResponse> {
@@ -65,7 +67,7 @@ class WeatherHandler {
                     response.name,
                     response.main.temp
                   )
-                }.toList()
+                }
               )
             }
           } as Mono<WeatherReport>,
