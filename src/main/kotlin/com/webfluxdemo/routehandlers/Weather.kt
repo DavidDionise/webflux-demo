@@ -4,7 +4,6 @@ import models.CityWeather
 import models.WeatherApiResponse
 import models.WeatherReport
 import models.WeatherRequest
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient

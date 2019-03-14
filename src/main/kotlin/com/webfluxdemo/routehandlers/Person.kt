@@ -6,7 +6,6 @@ import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import reactor.core.publisher.Mono
 
-// Fetches one user from the database
 fun fetchPersonById(request: ServerRequest): Mono<ServerResponse> {
   val personId = request.pathVariable("id")
 
@@ -63,7 +62,7 @@ fun updatePerson(request: ServerRequest): Mono<ServerResponse> {
       .syncBody("No person found in DB with id $id")
   } else {
     val updatedPerson = request.bodyToMono(Person::class.java)
-      .doOnSuccess { updatedPerson ->
+      .map { updatedPerson ->
         updatedPerson.id = id
         people = people.map { person ->
           if (person.id==id) {
@@ -72,6 +71,8 @@ fun updatePerson(request: ServerRequest): Mono<ServerResponse> {
             person
           }
         }.toMutableList()
+
+        updatedPerson
       }
 
     return ServerResponse
